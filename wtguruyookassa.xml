@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<extension type="plugin" method="upgrade" group="gurupayment">
+	<name>Gurupayment - WT Guru YooKassa</name>
+	<author>Sergey Tolkachyov</author>
+	<authorEmail>info@web-tolk.ru</authorEmail>
+	<authorUrl>https://web-tolk.ru/</authorUrl>
+	<creationDate>07/03/2023</creationDate>
+	<copyright>Sergey Tolkachyov</copyright>
+	<license>GNU General Public License v3.0</license>
+	<version>1.0.0</version>
+	<description>PLG_WTGURUYOOKASSA_DESC</description>
+	<namespace path="src">Joomla\Plugin\Gurupayment\Wtguruyookassa</namespace>
+	<scriptfile>script.php</scriptfile>
+	<files>
+		<folder plugin="wtguruyookassa">src</folder>
+		<folder>language</folder>
+		<folder>services</folder>
+		<folder>tmpl</folder>
+		<folder>sql</folder>
+	</files>
+	<languages folder="language" client="administrator">
+		<language tag="en-GB">en-GB/plg_gurupayment_wtguruyookassa.ini</language>
+		<language tag="ru-RU">ru-RU/plg_gurupayment_wtguruyookassa.ini</language>
+		<language tag="en-GB">en-GB/plg_gurupayment_wtguruyookassa.sys.ini</language>
+		<language tag="ru-RU">ru-RU/plg_gurupayment_wtguruyookassa.sys.ini</language>
+	</languages>
+	<install>
+		<sql>
+			<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+		</sql>
+	</install>
+	<uninstall>
+		<sql>
+			<file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+		</sql>
+	</uninstall>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+					<field addfieldprefix="Joomla\Plugin\Gurupayment\Wtguruyookassa\Fields" type="plugininfo" name="plugininfo"/>
+					<field addfieldprefix="Joomla\Plugin\Gurupayment\Wtguruyookassa\Fields" type="Checkwtyookassalibrary" name="Checkwtyookassalibrary"/>
+			</fieldset>
+			<fieldset name="yookassa_account"
+					  label="Yookassa Account"
+					  class="shadow">
+				<field addfieldprefix="Joomla\Plugin\Gurupayment\Wtguruyookassa\Fields" type="Yookassaaccountinfo" name="Yookassaaccountinfo"/>
+				<field name="shopId"
+					   type="text"
+					   label="PLG_WTGURUYOOKASSA_SHOP_ID"
+					   filter="integer"
+					   description="PLG_WTGURUYOOKASSA_SHOP_ID_DESC"
+					   parentclass="stack span-3-inline"/>
+				<field name="secretKey"
+					   type="password"
+					   label="PLG_WTGURUYOOKASSA_SECRET_KEY"
+					   description="PLG_WTGURUYOOKASSA_SECRET_KEY_DESC"
+					   parentclass="stack span-3-inline"/>
+				<field name="currency"
+					   type="list"
+					   label="PLG_WTGURUYOOKASSA_CURRENCY"
+					   description="PLG_WTGURUYOOKASSA_CURRENCY_DESC"
+					   class="btn-group btn-group-yesno"
+					   parentclass="stack span-3-inline"
+					   default="RUB">
+					<option value="RUB">RUB</option>
+					<option value="UAH">UAH</option>
+					<option value="BYN">BYN</option>
+					<option value="USD">USD</option>
+					<option value="EUR">EUR</option>
+				</field>
+				<field type="text"
+					   name="wtguruyookassa_label"
+					   label="PLG_WTGURUYOOKASSA_LABEL"
+					   description="PLG_WTGURUYOOKASSA_LABEL_DESC"
+					   parentclass="stack span-3-inline"
+					   default="YooKassa"/>
+				<field addfieldprefix="Joomla\Plugin\Gurupayment\Wtguruyookassa\Fields" type="Yookassanotifyurl" name="Yookassanotifyurl"/>
+			</fieldset>
+		</fields>
+	</config>
+	<updateservers>
+		<server type="extension" name="Web Tolk Update Server - WT Guru YooKassa">https://web-tolk.ru/component/swjprojects/jupdate.html?element=wtguruyookassa</server>
+	</updateservers>
+</extension>
